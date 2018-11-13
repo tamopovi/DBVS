@@ -1,0 +1,4 @@
+ER MODELIS
+ER DIAGRAMA
+DB REALIACINE SCHEMA PAGAL ER DIAGRAMA GRAFIŠKAI
+Sukurti reikiamas lenteles, apibrežti duomenu vientisumo reiklavimus ir užpildyti lenteles testiniais duomenimis.
