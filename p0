@@ -1,0 +1,3 @@
+SELECT B.Pavarde, A.Nr 
+FROM Stud.Egzempliorius A, Stud.Skaitytojas B
+WHERE  A.Skaitytojas = B.Nr AND B.Nr = 1000;

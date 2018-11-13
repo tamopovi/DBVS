@@ -1,0 +1,9 @@
+SELECT
+	A.Vardas, A.Pavarde, B.Vardas, B.Pavarde
+FROM
+	Stud.Skaitytojas A, Stud.Skaitytojas B
+	WHERE
+			EXTRACT(MONTH FROM A.Gimimas)= EXTRACT (MONTH FROM B.Gimimas)
+		AND 
+			A.Nr < B.Nr
+;

@@ -1,0 +1,6 @@
+SELECT DISTINCT SUBSTR
+	(Pavarde, 1,1) AS "Pirmosios pavardziu raides"
+FROM
+	Stud.Skaitytojas
+ORDER BY 1
+;

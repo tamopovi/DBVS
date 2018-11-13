@@ -1,0 +1,8 @@
+-- Kiekvienai knygai (ISBN ir pavadinimas) jos vis? skaitytoj? skai?ius ir vis? nepaimt? egzempliori? skai?ius.
+
+SELECT Stud.Knyga.Pavadinimas, Stud.Knyga.ISBN, COUNT (A.Paimta) AS Skaitytoju_sk
+FROM Stud.Knyga, Stud.Egzempliorius A
+WHERE Stud.Knyga.ISBN = A.ISBN
+--AND A.PAIMTA IS NOT NULL
+GROUP BY Stud.Knyga.ISBN
+ORDER BY 1;

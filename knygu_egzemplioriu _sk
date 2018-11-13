@@ -1,0 +1,5 @@
+SELECT Stud.Knyga.Pavadinimas, COUNT (*) AS Egz_sk
+FROM Stud.Knyga, Stud.Egzempliorius
+WHERE Stud.Knyga.ISBN = Stud.Egzempliorius.ISBN
+GROUP BY Stud.Knyga.ISBN
+ORDER BY 1;
