@@ -1,0 +1,12 @@
+Esybes:
+Specific Card (Card Text, Flavor Text, CMC, Color, Name, Number, Set)
+Type (Type Name) =>(potipiai) 
+Instant,
+Sorcery, 
+Creature (Power/Toughness)
+Artifact, 
+Enchantment
+
+Card Sets (Code, Name)
+Artist (Name, Surname)
+Language?

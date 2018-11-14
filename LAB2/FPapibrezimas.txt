@@ -1,0 +1,3 @@
+Jei atributu aibes A reikšmes korteže vienareikšmiškai
+apibrežia atributu aibes B reikšmes korteže, tai
+priklausomybe tarp A ir B vadiname funkcine (FP)

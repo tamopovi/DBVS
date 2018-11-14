@@ -2,3 +2,10 @@ ER MODELIS
 ER DIAGRAMA
 DB REALIACINE SCHEMA PAGAL ER DIAGRAMA GRAFIŠKAI
 Sukurti reikiamas lenteles, apibrežti duomenu vientisumo reiklavimus ir užpildyti lenteles testiniais duomenimis.
+
+Normines formos: http://klevas.mif.vu.lt/~baronas/dbvs/slides/dbvs_3_2.pdf
+
+1NF: lenteles reikšmes yra atomai
+2NF: lentele yra 1NF, atributai B visiškai priklauso nuo atributu A FP aibes F atžvilgiu, jei B funkciškai priklauso nuo visos aibes A, bet nera funkciškai priklausantys nei nuo jokio aibes A poabio.
+3NF: lentele yra 3NF FP aibes sF atžvilgiu, jei ji yra 1NF ir nera nepirminiu atributu, kurie tranzityviai priklausytu nuo rakto.
+	DB yra 3NF FP aibes F atžvilgiu, tada ir tik tada, kai visos jos lenteles yra 3NF F atžvilgiu.
