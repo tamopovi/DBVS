@@ -16,7 +16,7 @@ CREATE TABLE CSET (
 
 CREATE TABLE Card (
 	Name			VARCHAR(20)		NOT NULL,
-	Type			VARCHAR(25)		NOT NULL,
+	Type			VARCHAR(15)		NOT NULL,
 	Cost			INTEGER		CHECK (Cost >= 0),
 	CText			VARCHAR(210),
 	Color			CHAR(5) 			NOT NULL DEFAULT 'C',
@@ -33,7 +33,7 @@ CREATE TABLE Painting (
 CREATE TABLE Specimen (
 	Nr				INTEGER			NOT NULL CHECK (Nr >= 0),
 	Painting		VARCHAR(25),
-	Set			VARCHAR(3)			NOT NULL,
+	Set			CHAR(3)			NOT NULL,
 	FText			VARCHAR(125),
 	Name			VARCHAR(20)  	NOT NULL,
 	PRIMARY KEY (Nr, Set),
