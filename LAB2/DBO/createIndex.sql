@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX unique_set_name ON CSET(Name);

@@ -1,0 +1,2 @@
+DROP VIEW NoTextExtraNames;
+DROP MATERIALIZED VIEW CardAppearedInSets;
