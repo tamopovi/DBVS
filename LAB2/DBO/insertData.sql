@@ -1,17 +1,17 @@
 --Artists (Id, Name, Surname)
-INSERT INTO Artist VALUES (1, 'Terese', 'Nielsen');
-INSERT INTO Artist VALUES (2, 'John', 'Avon');
-INSERT INTO Artist VALUES (3, 'Raymond', 'Swanland');
-INSERT INTO Artist VALUES (4, 'Chase', 'Stone');
-INSERT INTO Artist VALUES (5, 'James', 'Paick');
-INSERT INTO Artist VALUES (6, 'Steve', 'Prescott');
-INSERT INTO Artist VALUES (7, 'Zhezou', 'Chen');
-INSERT INTO Artist VALUES (8, 'Mathias', 'Kollros');
-INSERT INTO Artist VALUES (9, 'Steve', 'Argyle');
-INSERT INTO Artist VALUES (10, 'Christine', 'Choi');
-INSERT INTO Artist VALUES (11, 'Jonas', 'De Ro');
-INSERT INTO Artist VALUES (12, 'Josh', 'Hass');
-INSERT INTO Artist VALUES (13, 'Lucas', 'Graciano');
+INSERT INTO Artist VALUES (DEFAULT, 'Terese', 'Nielsen');
+INSERT INTO Artist VALUES (DEFAULT, 'John', 'Avon');
+INSERT INTO Artist VALUES (DEFAULT, 'Raymond', 'Swanland');
+INSERT INTO Artist VALUES (DEFAULT, 'Chase', 'Stone');
+INSERT INTO Artist VALUES (DEFAULT, 'James', 'Paick');
+INSERT INTO Artist VALUES (DEFAULT, 'Steve', 'Prescott');
+INSERT INTO Artist VALUES (DEFAULT, 'Zhezou', 'Chen');
+INSERT INTO Artist VALUES (DEFAULT, 'Mathias', 'Kollros');
+INSERT INTO Artist VALUES (DEFAULT, 'Steve', 'Argyle');
+INSERT INTO Artist VALUES (DEFAULT, 'Christine', 'Choi');
+INSERT INTO Artist VALUES (DEFAULT, 'Jonas', 'De Ro');
+INSERT INTO Artist VALUES (DEFAULT, 'Josh', 'Hass');
+INSERT INTO Artist VALUES (DEFAULT, 'Lucas', 'Graciano');
 
 --Paintings
 INSERT INTO Painting VALUES ('ancient_crab0', 5);
