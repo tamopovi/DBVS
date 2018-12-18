@@ -40,13 +40,13 @@ INSERT INTO Card VALUES ('Essence Scatter', 'Instant', 2, 'Counter target creatu
 INSERT INTO Card VALUES ('Fetid Pools', 'Land', 0, '(Tap: Add Blue or Black.)\nFetid Pools enters the battlefield tapped.\nCycling 2 (2, Discard this card: Draw a card.)','UB');
 INSERT INTO Card VALUES ('Fling', 'Instant', 2, 'As an additional cost to cast this spell, sacrifice a creature.\nFling deals damage equal to the sacrificed creature''s power to any target.');
 
---Card Sets (code, CAmount, Year, SpecimenNr, Name)
-INSERT INTO CSET VALUES ('AKH', 269, 2017, NULL, 'Amonkhet');
-INSERT INTO CSET VALUES ('OOW', 184, 2016, NULL, 'Oath of the Gatewatch');
-INSERT INTO CSET VALUES ('XLN', 279, 2017, NULL, 'Ixalan');
-INSERT INTO CSET VALUES ('M19', 280, 2018, NULL, 'Core Set 2019');
-INSERT INTO CSET VALUES ('RIX', 196, 2018, NULL, 'Rivals of Ixalan');
---INSERT INTO CSET VALUES ('RC', 196, 2018, NULL, 'Rivals of Ixalawdn');
+--Card Sets (code, CAmount, Year, Name)
+INSERT INTO CSET VALUES ('AKH', 269, 2017, 'Amonkhet');
+INSERT INTO CSET VALUES ('OOW', 184, 2016, 'Oath of the Gatewatch');
+INSERT INTO CSET VALUES ('XLN', 279, 2017, 'Ixalan');
+INSERT INTO CSET VALUES ('M19', 280, 2018, 'Core Set 2019');
+INSERT INTO CSET VALUES ('RIX', 196, 2018, 'Rivals of Ixalan');
+--INSERT INTO CSET VALUES ('RC', 196, 2018, 'Rivals of Ixalawdn');
 
 --Card Specimen  (nr, painting, set, FText, Name)
 INSERT INTO Specimen VALUES (50, 'ancient_crab1', 'OOW', 'After the fall of Sea Gate and the draining of the Halimar basin, the crab set off to find a new home.','Ancient Crab');

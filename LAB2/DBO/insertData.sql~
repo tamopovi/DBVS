@@ -46,7 +46,7 @@ INSERT INTO CSET VALUES ('OOW', 184, 2016, NULL, 'Oath of the Gatewatch');
 INSERT INTO CSET VALUES ('XLN', 279, 2017, NULL, 'Ixalan');
 INSERT INTO CSET VALUES ('M19', 280, 2018, NULL, 'Core Set 2019');
 INSERT INTO CSET VALUES ('RIX', 196, 2018, NULL, 'Rivals of Ixalan');
---INSERT INTO CSET VALUES ('RRE', 196, 2018, NULL, 'Rivals of Ixalawdn');
+--INSERT INTO CSET VALUES ('RC', 196, 2018, NULL, 'Rivals of Ixalawdn');
 
 --Card Specimen  (nr, painting, set, FText, Name)
 INSERT INTO Specimen VALUES (50, 'ancient_crab1', 'OOW', 'After the fall of Sea Gate and the draining of the Halimar basin, the crab set off to find a new home.','Ancient Crab');
