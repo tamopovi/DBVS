@@ -1,11 +1,11 @@
-CREATE TABLE Artist (
+CREATE TABLE pota4187.Artist (
 	ID				SERIAL,
 	Name			VARCHAR(20)			NOT NULL,
 	Surname		VARCHAR(20),
 	PRIMARY KEY (ID)	 
 );
 
-CREATE TABLE Card (
+CREATE TABLE pota4187.Card (
 	Name			VARCHAR(20)			NOT NULL,
 	Type			VARCHAR(25)			NOT NULL,
 	Cost			INTEGER		CONSTRAINT positiveCost CHECK (Cost >= 0) DEFAULT 0,
@@ -14,13 +14,13 @@ CREATE TABLE Card (
 	PRIMARY KEY (Name)
 );
 
-CREATE TABLE Painting (
+CREATE TABLE pota4187.Painting (
 	Name			VARCHAR(25)			NOT NULL,
 	ArtistID		INTEGER 				NOT NULL,
 	PRIMARY KEY (Name),
 	FOREIGN KEY (ArtistID) REFERENCES Artist ON DELETE CASCADE
 );
-CREATE TABLE CSET (
+CREATE TABLE pota4187.CSET (
 	Code			VARCHAR(3)			NOT NULL,
 	CAmount		INTEGER				NOT NULL,
 	Year			INTEGER CONSTRAINT afterGameCreationYear CHECK (Year >= 1993),
@@ -28,7 +28,7 @@ CREATE TABLE CSET (
 	PRIMARY KEY (Code)
 );	
 
-CREATE TABLE Specimen (
+CREATE TABLE pota4187.Specimen (
 	Nr				INTEGER			NOT NULL CONSTRAINT nonNegativeCardNr CHECK (Nr >= 0),
 	Painting		VARCHAR(25),
 	SetCode		VARCHAR(3)		NOT NULL,
