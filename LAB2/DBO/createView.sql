@@ -1,5 +1,5 @@
 --substr arba split
-CREATE VIEW NoTextExtraNames AS
+CREATE VIEW ExtraCardInfo AS
 	SELECT Name, Type, Cost,
 	CASE 	WHEN substr(Color,1,1) = 'W' THEN 'White'
 			WHEN substr(Color,1,1) = 'U' THEN 'Blue'
@@ -39,3 +39,11 @@ CREATE MATERIALIZED VIEW CardAppearedInSets AS
 	GROUP BY Name
 	ORDER BY 1
 WITH NO DATA;
+
+CREATE MATERIALIZED VIEW TypeStatistics AS
+	SELECT A.Type, B.Color, COUNT(*) FROM Card A, ExtraCardInfo B 
+	WHERE A.Name = B.Name
+	GROUP BY A.Type, B.Color
+	ORDER BY 3 DESC
+WITH NO DATA;
+--dont forget to REFRESH MATERIALIZED VIEW TypeStatistics;

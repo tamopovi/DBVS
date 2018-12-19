@@ -17,8 +17,7 @@ LANGUAGE PLPGSQL;
 
 
 CREATE FUNCTION SpecimenNumberAuthentification() RETURNS "trigger" AS $$
-DECLARE specimenNr				SMALLINT;
-Declare setSize					SMALLINT;
+DECLARE setSize					SMALLINT;
 	BEGIN
 		
 		SELECT CAmount INTO setSize FROM CSET WHERE CSET.Code = NEW.SetCode;
@@ -30,6 +29,21 @@ Declare setSize					SMALLINT;
 $$
 LANGUAGE PLPGSQL;
 
+CREATE FUNCTION SpecimenNameAuthentification() RETURNS "trigger" AS $$
+DECLARE duplicateAmount			SMALLINT;
+	BEGIN
+	SELECT COUNT (*) INTO duplicateAmount FROM Specimen, Card 
+		WHERE Specimen.Name = NEW.Name AND 
+				Card.Name = NEW.Name AND
+				Specimen.SetCode = NEW.SetCode AND
+				NOT (Card.Type LIKE '%Basic%');
+	IF	duplicateAmount != 0
+		THEN RAISE EXCEPTION 'SET CANNOT CONTAIN MORE THAN ONE SPECIMEN OF A CARD! (except Basic Lands)';
+	END IF;
+	RETURN NEW;
+	END;
+$$
+LANGUAGE PLPGSQL;	
 
 CREATE TRIGGER checkingCodeLength
 	BEFORE INSERT OR UPDATE ON CSET
@@ -38,3 +52,7 @@ CREATE TRIGGER checkingCodeLength
 CREATE TRIGGER checkingSpecimenNumberViolation
 	BEFORE INSERT OR UPDATE ON Specimen
 	FOR EACH ROW EXECUTE PROCEDURE SpecimenNumberAuthentification();
+	
+CREATE TRIGGER checkingSpecimenNameViolation
+	BEFORE INSERT OR UPDATE ON Specimen
+	FOR EACH ROW EXECUTE PROCEDURE SpecimenNameAuthentification();

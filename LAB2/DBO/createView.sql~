@@ -38,4 +38,12 @@ CREATE MATERIALIZED VIEW CardAppearedInSets AS
 	SELECT Name as "Card Name", COUNT (*) AS "Set Count" FROM Specimen 
 	GROUP BY Name
 	ORDER BY 1
-WTIH NO DATA;
+WITH NO DATA;
+
+CREATE MATERIALIZED VIEW TypeStatistics AS
+	SELECT A.Type, B.Color, COUNT(*) FROM Card A, NoTextExtraNames B 
+	WHERE A.Name = B.Name
+	GROUP BY A.Type, B.Color
+	ORDER BY 3 DESC
+WITH NO DATA;
+--dont forget to REFRESH MATERIALIZED VIEW TypeStatistics;

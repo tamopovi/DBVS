@@ -6,33 +6,32 @@ CREATE TABLE Artist (
 );
 
 CREATE TABLE Card (
-	Name			VARCHAR(20)		NOT NULL,
-	Type			VARCHAR(25)		NOT NULL,
-	Cost			INTEGER		CHECK (Cost >= 0),
+	Name			VARCHAR(20)			NOT NULL,
+	Type			VARCHAR(25)			NOT NULL,
+	Cost			INTEGER		CONSTRAINT positiveCost CHECK (Cost >= 0) DEFAULT 0,
 	CText			VARCHAR(210),
-	Color			CHAR(5) 			NOT NULL DEFAULT 'C',
+	Color			CHAR(5) 				NOT NULL DEFAULT 'C',
 	PRIMARY KEY (Name)
 );
 
 CREATE TABLE Painting (
-	Name			VARCHAR(25)		NOT NULL,
-	ArtistID		INTEGER 			NOT NULL,
+	Name			VARCHAR(25)			NOT NULL,
+	ArtistID		INTEGER 				NOT NULL,
 	PRIMARY KEY (Name),
 	FOREIGN KEY (ArtistID) REFERENCES Artist ON DELETE CASCADE
 );
-
 CREATE TABLE CSET (
 	Code			VARCHAR(3)			NOT NULL,
 	CAmount		INTEGER				NOT NULL,
-	Year			INTEGER CHECK (Year >= 1993),
+	Year			INTEGER CONSTRAINT afterGameCreationYear CHECK (Year >= 1993),
 	Name			VARCHAR(30),
 	PRIMARY KEY (Code)
 );	
 
 CREATE TABLE Specimen (
-	Nr				INTEGER			NOT NULL CHECK (Nr >= 0),
+	Nr				INTEGER			NOT NULL CONSTRAINT nonNegativeCardNr CHECK (Nr >= 0),
 	Painting		VARCHAR(25),
-	SetCode		VARCHAR(3)			NOT NULL,
+	SetCode		VARCHAR(3)		NOT NULL,
 	FText			VARCHAR(125),
 	Name			VARCHAR(20)  	NOT NULL,
 	PRIMARY KEY (Nr, SetCode),
