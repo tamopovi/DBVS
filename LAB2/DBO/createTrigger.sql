@@ -1,21 +1,3 @@
-CREATE FUNCTION pota4187.ExactSetCodeLength() RETURNS "trigger" AS $$
-DECLARE codeLength				SMALLINT;
-DECLARE exactLength				SMALLINT := 3;
-	BEGIN
-	--NEW.table_name 			:= TG_ARGV[0];
-	--NEW.column_name 			:= TG_ARGV[1];
-		SELECT char_length(NEW.Code) INTO codeLength FROM pota4187.CSET;
-		
-		IF codeLength != exactLength
-			THEN RAISE EXCEPTION 'SET CODE MUST BE CONTAIN EXACTLY % CHARACTERS! ACTUAL LENGTH: %', exactLength , codeLength;
-		END IF;
-		RETURN NEW;
-		
-	END;
-$$
-LANGUAGE PLPGSQL;
-
-
 CREATE FUNCTION pota4187.SpecimenNumberAuthentification() RETURNS "trigger" AS $$
 DECLARE setSize					SMALLINT;
 	BEGIN
@@ -44,15 +26,11 @@ DECLARE duplicateAmount			SMALLINT;
 	END;
 $$
 LANGUAGE PLPGSQL;	
-
-CREATE TRIGGER checkingCodeLength
-	BEFORE INSERT OR UPDATE ON pota4187.CSET
-	FOR EACH ROW EXECUTE PROCEDURE ExactSetCodeLength();
 	
 CREATE TRIGGER checkingSpecimenNumberViolation
 	BEFORE INSERT OR UPDATE ON pota4187.Specimen
-	FOR EACH ROW EXECUTE PROCEDURE SpecimenNumberAuthentification();
+	FOR EACH ROW EXECUTE PROCEDURE pota4187.SpecimenNumberAuthentification();
 	
 CREATE TRIGGER checkingSpecimenNameViolation
 	BEFORE INSERT OR UPDATE ON pota4187.Specimen
-	FOR EACH ROW EXECUTE PROCEDURE SpecimenNameAuthentification();
+	FOR EACH ROW EXECUTE PROCEDURE pota4187.SpecimenNameAuthentification();

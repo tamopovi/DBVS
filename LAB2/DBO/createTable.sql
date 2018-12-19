@@ -18,10 +18,10 @@ CREATE TABLE pota4187.Painting (
 	Name			VARCHAR(25)			NOT NULL,
 	ArtistID		INTEGER 				NOT NULL,
 	PRIMARY KEY (Name),
-	FOREIGN KEY (ArtistID) REFERENCES Artist ON DELETE SET NULL
+	FOREIGN KEY (ArtistID) REFERENCES pota4187.Artist ON DELETE SET NULL
 );
 CREATE TABLE pota4187.CSET (
-	Code			VARCHAR(3)			NOT NULL CONSTRAINT ExactLength CHECK Length(Code) = 3,
+	Code			VARCHAR(3)			NOT NULL CONSTRAINT ExactLength CHECK (char_length(Code) = 3),
 	CAmount		INTEGER				NOT NULL,
 	Year			INTEGER CONSTRAINT afterGameCreationYear CHECK (Year >= 1993),
 	Name			VARCHAR(30),
