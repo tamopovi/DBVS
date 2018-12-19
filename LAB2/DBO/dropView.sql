@@ -1,3 +1,3 @@
-DROP VIEW pota4187.ExtraCardInfo CASCADE;
-DROP MATERIALIZED VIEW pota4187.CardAppearedInSets;
 DROP MATERIALIZED VIEW pota4187.TypeStatistics;
+DROP VIEW pota4187.ExtraCardInfo;
+DROP VIEW pota4187.CardAppearedInSets;

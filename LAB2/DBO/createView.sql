@@ -1,4 +1,3 @@
---substr arba split
 CREATE VIEW pota4187.ExtraCardInfo AS
 	SELECT Name, Type, Cost,
 	CASE 	WHEN substr(Color,1,1) = 'W' THEN 'White'
@@ -34,11 +33,10 @@ CREATE VIEW pota4187.ExtraCardInfo AS
 		END AS Color
 FROM pota4187.Card;
 
-CREATE MATERIALIZED VIEW pota4187.CardAppearedInSets AS
+CREATE VIEW pota4187.CardAppearedInSets AS
 	SELECT Name as "Card Name", COUNT (*) AS "Set Count" FROM pota4187.Specimen 
 	GROUP BY Name
-	ORDER BY 1
-WITH NO DATA;
+	ORDER BY 1;
 
 CREATE MATERIALIZED VIEW pota4187.TypeStatistics AS
 	SELECT A.Type, B.Color, COUNT(*) FROM pota4187.Card A, pota4187.ExtraCardInfo B 
