@@ -1,6 +1,6 @@
 --Artists (Id, Name, Surname)
-INSERT INTO pota4187.pota4187.Artist VALUES (DEFAULT, 'Terese', 'Nielsen');
-INSERT INTO pota4187.pota4187.Artist VALUES (DEFAULT, 'John', 'Avon');
+INSERT INTO pota4187.Artist VALUES (DEFAULT, 'Terese', 'Nielsen');
+INSERT INTO pota4187.Artist VALUES (DEFAULT, 'John', 'Avon');
 INSERT INTO pota4187.Artist VALUES (DEFAULT, 'Raymond', 'Swanland');
 INSERT INTO pota4187.Artist VALUES (DEFAULT, 'Chase', 'Stone');
 INSERT INTO pota4187.Artist VALUES (DEFAULT, 'James', 'Paick');
