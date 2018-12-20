@@ -215,6 +215,70 @@ namespace MagicDB
             }
         }
 
+        public void InsertSpecimen()
+        {
+            Console.WriteLine("Inserting specimen:");
+
+            Console.Write("Nr: ");
+            int nr = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Painting: ");
+            string painting = Console.ReadLine();
+
+            Console.Write("Set Code: ");
+            string setCode = Console.ReadLine();
+
+            Console.Write("Flavor Text: ");
+            string fText = Console.ReadLine();
+
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            string insertCardCommand = "INSERT INTO pota4187.Specimen VALUES (@nr, @painting, @setCode, @ftext, @name);";
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+                    NpgsqlCommand inCommand = new NpgsqlCommand(insertCardCommand, connection);
+                    try
+                    {
+                        inCommand.Parameters.AddWithValue("name", name);
+                        inCommand.Parameters.AddWithValue("nr", nr);
+                        inCommand.Parameters.AddWithValue("setCode", setCode);
+                        inCommand.Parameters.AddWithValue("fText", fText);
+                        inCommand.Parameters.AddWithValue("painting", painting);
+
+                        inCommand.ExecuteNonQuery();
+                        Console.WriteLine($"Inserted values ('{nr}','{painting}',{setCode},'{fText}','{name}')");
+                    }
+                    catch (PostgresException ex)
+                    {
+                        Console.WriteLine("Insertion failed.");
+                        if (ex.Code == "42703")
+                            Console.WriteLine("pgException: you might be inserting a wrong data type");
+
+                        if (ex.Code == "23505")
+                            Console.WriteLine("integrityException: specimen would not be unique, select different number in set");
+
+                        if (ex.Code == "P0001")
+                            Console.WriteLine("caughtTrigger: set cannot contain more than one card of the same name");
+
+                        if (ex.Code == "23503")
+                            Console.WriteLine("foreignKeyException: painting, set or card does not exist");
+                        //Console.WriteLine(ex.Code);
+                    }
+
+                    //Console.WriteLine($"Inserted values ('{name}','{type}',{cost},'{text}','{color}')");
+                }
+
+            }
+            catch (Exception msg)
+            {
+                Console.WriteLine(msg.ToString());
+                throw;
+            }
+        }
+
         public void UpdateCardType()
         {
             Console.WriteLine("Updating card type:");

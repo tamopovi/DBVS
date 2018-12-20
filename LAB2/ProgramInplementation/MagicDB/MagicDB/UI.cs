@@ -21,9 +21,9 @@ namespace MagicDB
             Console.WriteLine(new String('*', 35));
             Console.WriteLine("show artist list");
             Console.WriteLine("show specimen list");
-            Console.WriteLine("CARD");
             Console.WriteLine("card search");
             Console.WriteLine("insert card");
+            Console.WriteLine("insert specimen");
             Console.WriteLine("update card type");
             Console.WriteLine("update specimen number");
             Console.WriteLine("delete specimen");
@@ -67,6 +67,11 @@ namespace MagicDB
                     case "delete specimen":
                         {
                             DM.DeleteSpecimen();
+                        }
+                        break;
+                    case "insert specimen":
+                        {
+                            DM.InsertSpecimen();
                         }
                         break;
                     default:
