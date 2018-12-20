@@ -24,8 +24,9 @@ namespace MagicDB
             Console.WriteLine("CARD");
             Console.WriteLine("card search");
             Console.WriteLine("insert card");
-            Console.WriteLine("update card");
-            Console.WriteLine("update specimen");
+            Console.WriteLine("update card type");
+            Console.WriteLine("update specimen number");
+            Console.WriteLine("delete specimen");
             Console.WriteLine("exit");
             Console.WriteLine(new String('*', 35));
             Console.WriteLine();
@@ -48,14 +49,14 @@ namespace MagicDB
                             DM.InsertCard();
                         }
                         break;
-                    case "update card":
+                    case "update card type":
                         {
-                            DM.UpdateCard();
+                            DM.UpdateCardType();
                         }
                         break;
-                    case "update specimen":
+                    case "update specimen number":
                         {
-                            DM.UpdateSpecimen();
+                            DM.UpdateSpecimenNr();
                         }
                         break;
                     case "show specimen list":
@@ -63,7 +64,11 @@ namespace MagicDB
                             DM.ShowSpecimenList();
                         }
                         break;
-
+                    case "delete specimen":
+                        {
+                            DM.DeleteSpecimen();
+                        }
+                        break;
                     default:
                         break;
                 }

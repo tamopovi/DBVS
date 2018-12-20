@@ -59,15 +59,24 @@ namespace MagicDB
             List<string> fTextList = new List<string>();
             List<string> nameList = new List<string>();
             const int fieldWidthLeftAligned = -18;
+            //string selectQuery = "SELECT @nr, @painting, @setCode, @fText, @name FROM pota4187.Specimen";
             try
             {
                 using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
                 {
                     conn.Open();
-                    NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM pota4187.Specimen", conn);
+                    NpgsqlCommand cmd = new NpgsqlCommand("SELECT Nr, Painting, setCode, fText, name FROM pota4187.Specimen", conn);
+                    /*
+                    cmd.Parameters.AddWithValue("nr", "nr");
+                    cmd.Parameters.AddWithValue("painting", "painting");
+                    cmd.Parameters.AddWithValue("setCode", "setcode");
+                    cmd.Parameters.AddWithValue("fText", "ftext");
+                    cmd.Parameters.AddWithValue("name", "name");
+                    */
                     NpgsqlDataReader dr = cmd.ExecuteReader();
                     for (int i = 0; dr.Read(); i++)
                     {
+                        Console.WriteLine(dr[0]);
                         nrList.Add(Int32.Parse(dr[0].ToString()));
                         paintingList.Add(dr[1].ToString());
                         setCodeList.Add(dr[2].ToString());
@@ -169,14 +178,21 @@ namespace MagicDB
             string color = Console.ReadLine();
             // 42703
             // 23514
+            string insertCardCommand = "INSERT INTO pota4187.Card VALUES (@name, @type, @cost, @text, @color);";
             try
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    NpgsqlCommand inCommand = new NpgsqlCommand($"INSERT INTO pota4187.Card VALUES ('{name}','{type}',{cost},'{text}','{color}');", connection);
+                    NpgsqlCommand inCommand = new NpgsqlCommand(insertCardCommand, connection);
                     try
                     {
+                        inCommand.Parameters.AddWithValue("name", name);
+                        inCommand.Parameters.AddWithValue("type", type);
+                        inCommand.Parameters.AddWithValue("cost", cost);
+                        inCommand.Parameters.AddWithValue("text", text);
+                        inCommand.Parameters.AddWithValue("color", color);
+
                         inCommand.ExecuteNonQuery();
                         Console.WriteLine($"Inserted values ('{name}','{type}',{cost},'{text}','{color}')");
                     }
@@ -199,26 +215,32 @@ namespace MagicDB
             }
         }
 
-        public void UpdateCard()
+        public void UpdateCardType()
         {
-            Console.WriteLine("Updating card:");
+            Console.WriteLine("Updating card type:");
             Console.Write("Which card would you like to update ? ");
             string name = Console.ReadLine();
 
-            Console.Write("What would you like to change about the card ? ");
-            string updatingColumn = Console.ReadLine();
+            //Console.Write("What would you like to change about the card ? ");
+            //string updatingColumn = Console.ReadLine();
 
             Console.Write("What should be the new value ? ");
             string updatedValue = Console.ReadLine();
+
+            string updateCommand = "UPDATE pota4187.Card SET Type = @updatedValue WHERE name = @name";
             try
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    NpgsqlCommand inCommand = new NpgsqlCommand($"UPDATE pota4187.Card SET {updatingColumn} = '{updatedValue}' WHERE name = '{name}'", connection);
+                    NpgsqlCommand upCommand = new NpgsqlCommand(updateCommand, connection);
                     try
                     {
-                        inCommand.ExecuteNonQuery();
+                        //upCommand.Parameters.AddWithValue("updatingColumn", updatingColumn);
+                        upCommand.Parameters.AddWithValue("updatedValue", updatedValue);
+                        upCommand.Parameters.AddWithValue("name", name);
+
+                        upCommand.ExecuteNonQuery();
                         Console.WriteLine("Update successful.");
                     }
                     catch (PostgresException ex)
@@ -227,12 +249,13 @@ namespace MagicDB
                             Console.WriteLine("dataException: cost must be a positive number");
                         if (ex.Code == "23514")
                             Console.WriteLine("checkException: cost cannot be negative");
-                        if (ex.Code == "42703")
+                        /*if (ex.Code == "42703")
                             Console.WriteLine($"accessException: card doesn't have a '{updatingColumn}' column");
                         if (ex.Code == "42601")
                             Console.WriteLine($"accessException: card doesn't have a '{updatingColumn}' column");
                         //Console.WriteLine(ex.Code);
                         //Console.WriteLine(ex.ToString());
+                        */
                     }
 
                     //Console.WriteLine($"Inserted values ('{name}','{type}',{cost},'{text}','{color}')");
@@ -246,9 +269,11 @@ namespace MagicDB
             }
         }
 
-        public void UpdateSpecimen()
+        //public void
+
+        public void UpdateSpecimenNr()
         {
-            Console.WriteLine("Updating specimen:");
+            Console.WriteLine("Updating specimen nr:");
             Console.WriteLine("Would you like to see the specimen list first ?");
             string seeList = Console.ReadLine();
             if (seeList.ToLower() == "yes")
@@ -260,20 +285,21 @@ namespace MagicDB
             Console.Write("Set code: ");
             string setCode = Console.ReadLine();
 
-            Console.Write("What would you like to update about this specimen? ");
-            string updatingColumn = Console.ReadLine();
-
             Console.Write("What is the new value ? ");
-            string updatedValue = Console.ReadLine();
+            int updatedValue = Convert.ToInt32(Console.ReadLine());
+            string updateCommand = "UPDATE pota4187.Specimen SET Nr = @updatedValue WHERE Nr = @numberInSet AND SetCode = @setCode";
             try
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
                 {
                     connection.Open();
-                    NpgsqlCommand inCommand = new NpgsqlCommand($"UPDATE pota4187.Specimen SET {updatingColumn} = '{updatedValue}' WHERE Nr = '{numberInSet}' AND SetCode = '{setCode}'", connection);
+                    NpgsqlCommand upCommand = new NpgsqlCommand(updateCommand, connection);
                     try
                     {
-                        inCommand.ExecuteNonQuery();
+                        upCommand.Parameters.AddWithValue("updatedValue", updatedValue);
+                        upCommand.Parameters.AddWithValue("numberInSet", numberInSet);
+                        upCommand.Parameters.AddWithValue("setCode", setCode);
+                        upCommand.ExecuteNonQuery();
                         Console.WriteLine("Update successful.");
                     }
                     catch (PostgresException ex)
@@ -282,18 +308,69 @@ namespace MagicDB
                             Console.WriteLine("dataException: cost must be a positive number");
                         if (ex.Code == "23514")
                             Console.WriteLine("checkException: cost cannot be negative");
-                        if (ex.Code == "42703")
+                        //Console.WriteLine(ex.Code);
+                        if (ex.Code == "P0001")
+                            Console.WriteLine("caught trigger");
+                        /*if (ex.Code == "42703")
                             Console.WriteLine($"accessException: card doesn't have a '{updatingColumn}' column");
                         if (ex.Code == "42601")
                             Console.WriteLine($"accessException: card doesn't have a '{updatingColumn}' column");
-                        if (ex.Code == "P0001")
-                            Console.WriteLine("caught trigger");
                         Console.WriteLine(ex.Code);
                         //Console.WriteLine(ex.ErrorCode);
                         //Console.WriteLine(ex.ToString());
+                        */
                     }
 
                     //Console.WriteLine($"Inserted values ('{name}','{type}',{cost},'{text}','{color}')");
+                }
+
+            }
+            catch (Exception msg)
+            {
+                Console.WriteLine(msg.ToString());
+                throw;
+            }
+        }
+
+        public void DeleteSpecimen()
+        {
+            Console.WriteLine("Deleting specimen:");
+            Console.WriteLine("Would you like to see the specimen list first ?");
+            string seeList = Console.ReadLine();
+            if (seeList.ToLower() == "yes")
+                ShowSpecimenList();
+
+            Console.WriteLine("Which specimen would you like to delete from DB ?");
+
+            Console.Write("Number in set: ");
+            int numberInSet = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Set code: ");
+            string setCode = Console.ReadLine();
+            string deleteCommand = "DELETE FROM pota4187.Specimen WHERE Nr = @numberInSet AND SetCode = @setCode";
+            try
+            {
+                using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+                    NpgsqlCommand deCommand = new NpgsqlCommand(deleteCommand, connection);
+                    try
+                    {
+                        deCommand.Parameters.AddWithValue("numberInSet", numberInSet);
+                        deCommand.Parameters.AddWithValue("setCode", setCode);
+                        deCommand.ExecuteNonQuery();
+                        Console.WriteLine("Deletion successful.");
+                    }
+                    catch (PostgresException ex)
+                    {
+                        if (ex.Code == "22P02")
+                            Console.WriteLine("dataException: cost must be a positive number");
+                        if (ex.Code == "23514")
+                            Console.WriteLine("checkException: cost cannot be negative");
+                        //Console.WriteLine(ex.Code);
+                        if (ex.Code == "P0001")
+                            Console.WriteLine("caught trigger");
+                    }
                 }
 
             }
