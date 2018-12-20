@@ -20,6 +20,7 @@ namespace MagicDB
             Console.WriteLine("Command list: (not case sensitive)");
             Console.WriteLine(new String('*', 35));
             Console.WriteLine("show artist list");
+            Console.WriteLine("show specimen list");
             Console.WriteLine("CARD");
             Console.WriteLine("card search");
             Console.WriteLine("insert card");
@@ -55,6 +56,11 @@ namespace MagicDB
                     case "update specimen":
                         {
                             DM.UpdateSpecimen();
+                        }
+                        break;
+                    case "show specimen list":
+                        {
+                            DM.ShowSpecimenList();
                         }
                         break;
 

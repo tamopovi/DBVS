@@ -50,6 +50,49 @@ namespace MagicDB
                 throw;
             }
         }
+
+        public void ShowSpecimenList()
+        {
+            List<int> nrList = new List<int>();
+            List<string> paintingList = new List<string>();
+            List<string> setCodeList = new List<string>();
+            List<string> fTextList = new List<string>();
+            List<string> nameList = new List<string>();
+            const int fieldWidthLeftAligned = -18;
+            try
+            {
+                using (NpgsqlConnection conn = new NpgsqlConnection(connectionString))
+                {
+                    conn.Open();
+                    NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM pota4187.Specimen", conn);
+                    NpgsqlDataReader dr = cmd.ExecuteReader();
+                    for (int i = 0; dr.Read(); i++)
+                    {
+                        nrList.Add(Int32.Parse(dr[0].ToString()));
+                        paintingList.Add(dr[1].ToString());
+                        setCodeList.Add(dr[2].ToString());
+                        fTextList.Add(dr[3].ToString());
+                        nameList.Add(dr[4].ToString());
+                    }
+                    Console.WriteLine("SPECIMEN LIST:");
+                    Console.WriteLine($"|{"Nr",fieldWidthLeftAligned}|{"Painting",fieldWidthLeftAligned}|{"Set Code",fieldWidthLeftAligned}|{"Name",fieldWidthLeftAligned}");
+                    Console.WriteLine(new String('-', 100));
+                    for (int i = 0; i < nrList.Count; i++)
+                    {
+                        Console.WriteLine($"|{nrList[i],fieldWidthLeftAligned}|{paintingList[i],fieldWidthLeftAligned}|{setCodeList[i],fieldWidthLeftAligned}|{nameList[i],fieldWidthLeftAligned}");
+                    }
+                    Console.WriteLine(new String('-', 100));
+                    dr.Close();
+                }
+            }
+            catch (Exception msg)
+            {
+                Console.WriteLine(msg.ToString());
+                Console.ReadKey();
+                throw;
+            }
+        }
+
         public void CardSearch()
         {
             string cardName = "";
@@ -206,6 +249,10 @@ namespace MagicDB
         public void UpdateSpecimen()
         {
             Console.WriteLine("Updating specimen:");
+            Console.WriteLine("Would you like to see the specimen list first ?");
+            string seeList = Console.ReadLine();
+            if (seeList.ToLower() == "yes")
+                ShowSpecimenList();
             Console.WriteLine("Which specimen would you like to update ?");
             Console.Write("Number in set: ");
             int numberInSet = Convert.ToInt32(Console.ReadLine());
