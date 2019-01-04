@@ -1,4 +1,3 @@
 # DBVS
-Database Managemnt Systems
---
+Database Managemnt Systems  
 During the course, we used PostgreSQL, practice work done using C#
