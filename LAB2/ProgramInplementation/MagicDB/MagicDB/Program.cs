@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Configuration;
 namespace MagicDB
 {
     class Program
@@ -11,8 +12,7 @@ namespace MagicDB
         static void Main(string[] args)
         {
             //TODO: implement transactions
-            string connstring = "Server=127.0.0.1; Port=5432; User Id=postgres; Password=h*!J45R^sntuz; Database=MagicDB;";
-            UI userInterface = new UI(connstring);
+            UI userInterface = new UI(ConfigurationManager.ConnectionStrings["MDB"].ConnectionString.ToString());
             userInterface.Launch();
         }
     }
